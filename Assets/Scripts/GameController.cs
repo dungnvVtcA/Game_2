@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject Items_;
 
+    public GameObject boss;
+
     List<GameObject> lisEnemy;
 
     public float timePart = 0.0f;
@@ -62,7 +64,8 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-       // isBoss = true;
+       
+        //isBoss = true;
         lisEnemy = new List<GameObject>();
         StartCoroutine(asteroidWake());
     }
@@ -123,7 +126,7 @@ public class GameController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(respawnTime);
-            if(/*timePart > 15*/ timePart > 5)
+            if(timePart > 15)
             {
                 if(flagmaxEnySmall <= 20)
                 {
@@ -145,8 +148,11 @@ public class GameController : MonoBehaviour
                     spawnEnemyCarries();
                     flagmaxEneCarries++;
                 }
-                if (enemyCarries)
+                if (enemyCarries )
                 {
+                    GameObject boss_ = Instantiate(boss) as GameObject;
+                    boss.transform.position = new Vector2(0f, ScreenGame.y *2);
+                    lisEnemy.Add(boss_);
                     isBoss = true;
                 }
 

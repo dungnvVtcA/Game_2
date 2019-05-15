@@ -14,7 +14,7 @@ public class DisplayAsteroid : MonoBehaviour
 
     void Start()
     {
-        return;
+        //return;
         screenBonus = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         StartCoroutine(asteroidWake());
     }

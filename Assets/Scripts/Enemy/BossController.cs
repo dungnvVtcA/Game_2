@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     public float speedMove = 0;
 
-    private int life = 3000;
+    public int life = 3000;
 
     Rigidbody2D rigid;
 
@@ -25,7 +25,6 @@ public class BossController : MonoBehaviour
 
     private void Awake()
     {
-        return;
         screen = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         //width = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
 
@@ -34,7 +33,7 @@ public class BossController : MonoBehaviour
         checkLeft = true;
         checkRight = false;
 
-        speedMove = 5.0f;
+        speedMove = 0.5f;
 
         
     }
@@ -57,7 +56,7 @@ public class BossController : MonoBehaviour
         // sửa lại boss to
 
         countPosition += Time.deltaTime;
-        if (transform.position.y >= 80.0f)
+        if (transform.position.y >= 3f)
         {
             Debug.Log("vao day roi");
             transform.position = new Vector3(transform.position.x, transform.position.y - (speedMove * Time.deltaTime), transform.position.z);
@@ -110,11 +109,18 @@ public class BossController : MonoBehaviour
             collision.gameObject.SetActive(false);
             life -= 2;
         }
+        if (collision.tag == "bulletAssistant")
+        {
+            life--;
+            collision.gameObject.SetActive(false);
+
+        }
         if (life == 0)
         {
-
-            Destroy(gameObject);
             collision.gameObject.SetActive(false);
+            GameController.game.CheckEnemyDead(this.gameObject);
+            Destroy(gameObject);
+            
         }
     }
 
