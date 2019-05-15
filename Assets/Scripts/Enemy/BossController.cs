@@ -7,8 +7,6 @@ public class BossController : MonoBehaviour
 {
     public float speedMove = 0;
 
-    GameObject game;
-
     private int life = 3000;
 
     Rigidbody2D rigid;
@@ -25,19 +23,18 @@ public class BossController : MonoBehaviour
 
     private bool checkRight;
 
-    private Vector3 offset;
-
     private void Awake()
     {
+        return;
         screen = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        width = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
+        //width = transform.GetComponent<SpriteRenderer>().bounds.extents.x;
 
-        height = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
+        //height = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
 
         checkLeft = true;
         checkRight = false;
 
-        speedMove = 0.5f;
+        speedMove = 5.0f;
 
         
     }
@@ -46,27 +43,23 @@ public class BossController : MonoBehaviour
     {
         
         this.gameObject.name = "bossParent";
-        game = GameObject.Find("background");
-
-        offset = game.transform.position - this.transform.position;
-        
 
 
     }
     // Update is called once per frame
     void Update()
     {
-        
-        if(!GameController.game.isBoss)
+
+        if (!GameController.game.isBoss)
         {
             return;
         }
-        
-       
+        // sửa lại boss to
+
         countPosition += Time.deltaTime;
-        if (transform.position.y >= 2.2)
+        if (transform.position.y >= 80.0f)
         {
-            
+            Debug.Log("vao day roi");
             transform.position = new Vector3(transform.position.x, transform.position.y - (speedMove * Time.deltaTime), transform.position.z);
         }
 
@@ -76,7 +69,7 @@ public class BossController : MonoBehaviour
             {
                 //transform.position += new Vector3(-1, -1, 0) * 3f * Time.deltaTime;
                 transform.position += new Vector3(-1, 0, 0) * 0.5f * Time.deltaTime;
-                game.transform.position += new Vector3(-1, 0, 0) * 20f* Time.deltaTime;
+              
                 if (transform.position.x <= -1.5)
                 {
                     checkLeft = false;
@@ -86,7 +79,7 @@ public class BossController : MonoBehaviour
             if (checkRight)
             {
                 transform.position += new Vector3(1, 0, 0) * 0.5f  * Time.deltaTime;
-                game.transform.position += new Vector3(1, 0, 0) * 20f* Time.deltaTime;
+               
                 if (transform.position.x >= 1.5)
                 {
                     checkLeft = true;

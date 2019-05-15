@@ -64,9 +64,16 @@ public class EnemyYellow : MonoBehaviour
             life -= 2;
             collision.gameObject.SetActive(false);
         }
-        if (life == 0)
+        if (collision.tag == "bulletAssistant")
+        {
+            life--;
+            collision.gameObject.SetActive(false);
+
+        }
+        if (life <= 0)
         {
             GameController.game.CountEnemyYellowDead++;
+            GameController.game.CheckEnemyDead(this.gameObject);
             Destroy(gameObject);
             collision.gameObject.SetActive(false);
         }

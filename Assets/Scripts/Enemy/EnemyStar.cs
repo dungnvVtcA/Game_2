@@ -79,49 +79,28 @@ public class EnemyStar : MonoBehaviour
     {
         if (other.tag == "bulletPlayer")
         {
-      
+
             life--;
             other.gameObject.SetActive(false);
-            if(life == 0)
-            {
-                for (int i = 0; i < GameController.game.GetLisEnemy().Count; i++)
-                {
-                    if (transform.position == GameController.game.GetLisEnemy()[i].transform.position)
-                    {
-                        //bulletAssistant.bulletASS.setGameObject(null);
-                        GameController.game.GetLisEnemy().RemoveAt(i);
-                    }
-                }
-            }
 
         }
-        else if(other.tag =="bulletDouble")
+        if (other.tag =="bulletDouble")
         {
             other.gameObject.SetActive(false);
             life -= 2;
-        }
-        if (life == 0)
-        {
-            GameController.game.CountEnemySmallDead++;
-            GameController.game.DestroyEnemy(transform.position.x, transform.position.y);
-            Destroy(this.gameObject);
-            other.gameObject.SetActive(false);
         }
         if(other.tag == "bulletAssistant")
         {
             life--;
             other.gameObject.SetActive(false);
-            if(life == 0)
-            {
-                for (int i = 0; i < GameController.game.GetLisEnemy().Count; i++)
-                {
-                    if (transform.position == GameController.game.GetLisEnemy()[i].transform.position)
-                    {
-                        //bulletAssistant.bulletASS.setGameObject(null);
-                        GameController.game.GetLisEnemy().RemoveAt(i);
-                    }
-                }
-            }
+           
+        }
+        if (life <= 0)
+        {
+            GameController.game.CountEnemySmallDead++;
+            GameController.game.CheckEnemyDead(this.gameObject);
+            Destroy(this.gameObject);
+            other.gameObject.SetActive(false);
         }
 
 

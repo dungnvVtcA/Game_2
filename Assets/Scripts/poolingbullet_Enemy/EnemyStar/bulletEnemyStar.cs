@@ -22,6 +22,10 @@ public class bulletEnemyStar : MonoBehaviour
         GameObject player = GameObject.Find("player");
 
         GameObject EnemyStar = GameObject.Find("EnemyYellow");
+        if(player == null)
+        {
+            player = GameObject.Find("player");
+        }
         if(EnemyStar)
         {
             if (EnemyStar.transform.position.y > player.transform.position.y)

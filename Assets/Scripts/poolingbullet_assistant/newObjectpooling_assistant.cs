@@ -42,7 +42,7 @@ public class newObjectpooling_assistant : MonoBehaviour
                 }
             }
         }
-        Debug.Log(pooledObjects.Count);
+       
         return null;
     }
 }

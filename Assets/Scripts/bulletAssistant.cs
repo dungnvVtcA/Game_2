@@ -29,12 +29,18 @@ public class bulletAssistant : MonoBehaviour
     {
         if (GameController.game.GetLisEnemy().Count > 0 && objEne == null)
         {
-            objEne = GameController.game.AssitantAinim(transform.position.y);
+            objEne = GameController.game.AssitantAinim(this.transform);
+            Debug.Log("vao 1 lan thoi vao deo gi lam the");
 
         }
-
+        if(GameController.game.GetLisEnemy().Count == 0 || objEne == null) 
+        {
+            transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y, obj.transform.position.z);
+            Debug.Log("null nha");
+        }
         if (objEne != null)
-        {   
+        {
+           
             transform.position = Vector2.MoveTowards(transform.position, objEne.transform.position, 0.1f);   
         }
         

@@ -35,40 +35,5 @@ public class bullet : MonoBehaviour
 
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.tag == "asteroid")
-    //    {
-    //        GameObject game = Instantiate(explosion) as GameObject;
-    //        game.transform.position = transform.position;
-    //        Destroy(gameObject);
-    //        Destroy(collision.gameObject);
-
-    //    }
-
-    //}
-    //public GameObject getPooledObject(int currenBullet)
-    //{
-    //    for (int i = 0; i < pooledObject_.Count; i++)
-    //    {
-    //        if (i == currenBullet)
-    //        {
-    //            for (int j = 0; j < pooledObject_[0].Count; j++)
-    //            {
-    //                if (!pooledObject_[0][j].activeInHierarchy)
-    //                {
-    //                    return pooledObject_[0][j];
-    //                }
-    //            }
-    //            if (willGrow)
-    //            {
-    //                GameObject obj = (GameObject)Instantiate(pooledObject);
-    //                pooledObject_[0].Add(obj);
-    //                return obj;
-    //            }
-    //        }
-    //    }
-
-    //    return null;
-    //}
+   
 }

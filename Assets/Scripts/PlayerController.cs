@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             life--;
             Destroy(collision.gameObject);
             //transform.position = Vector2.MoveTowards(transform.position, PlayerStart, 0.2f);
-        }if( collision.tag =="bossparent"|| collision.tag== "EnemyCarries" || collision.tag == "EnemyStar" || collision.tag == "bulletEnemyStar"|| collision.tag=="bulletBoss" )
+        }if( collision.tag =="EnemySmall"|| collision.tag== "EnemyCarries" || collision.tag == "EnemyStar" || collision.tag == "bulletEnemyStar"|| collision.tag=="bulletBoss" )
         {
             life--;
         }
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             GameController.game.typeBullet = 2;
             Destroy(collision.gameObject);
         }
-
+        Debug.Log(GameController.game.GetLisEnemy().Count);
        
     }
     public int getLifePlayer()

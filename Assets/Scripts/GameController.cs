@@ -72,11 +72,11 @@ public class GameController : MonoBehaviour
     {
         //return;
         timePart += Time.deltaTime;
-        if(CountEnemySmallDead == 15)
+        if(CountEnemySmallDead == 20)
         {
             enemySmallDead = true;
         }
-        if (CountEnemyYellowDead == 16)
+        if (CountEnemyYellowDead == 20)
         {
             enemyStarDead = true;
         }
@@ -123,20 +123,20 @@ public class GameController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(respawnTime);
-            if(timePart > 15)
+            if(/*timePart > 15*/ timePart > 5)
             {
                 if(flagmaxEnySmall <= 20)
                 {
                     spawnEnemyScrolling();
                     flagmaxEnySmall++;
                 }
-                if(enemySmallDead && flagmaxEneyYellow <= 16)
+                if (enemySmallDead && flagmaxEneyYellow <= 20)
                 {
                     spawnEnemyYellow();
                     flagmaxEneyYellow++;
 
                 }
-                if(enemyStarDead && flagmaxEneCarries <= 10)
+                if (enemyStarDead && flagmaxEneCarries <= 10)
                 {
                     if (flagmaxEneCarries == 4)
                     {
@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
                     spawnEnemyCarries();
                     flagmaxEneCarries++;
                 }
-                if(enemyCarries)
+                if (enemyCarries)
                 {
                     isBoss = true;
                 }
@@ -156,26 +156,24 @@ public class GameController : MonoBehaviour
         }
         
     }
-    public GameObject AssitantAinim(float positiony)
+    public GameObject AssitantAinim(Transform transformObject)
     {
         float positionMin = 0f;
-        if( lisEnemy[0] != null)
+        if( lisEnemy == null)
         {
-            positionMin = lisEnemy[0].transform.position.y - positiony;
+            return null;
         }
-        if(lisEnemy.Count >= 2)
+        positionMin = Vector2.Distance(lisEnemy[0].transform.position, transformObject.position);
+        if (lisEnemy.Count >= 2)
         {
             for (int i = 1; i < lisEnemy.Count; i++)
             {
-                var y = lisEnemy[i].transform.position.y;
-                if (y < 0)
+                var y = Vector2.Distance(lisEnemy[i].transform.position, transformObject.position);
+                if (positionMin > y)
                 {
-                    var a = changeValue(y);
-                    if (positionMin > a)
-                    {
-                        positionMin = a;
-                        obj = lisEnemy[i];
-                    }
+                    Debug.Log("ddax check");
+                    positionMin = y;
+                    obj = lisEnemy[i];
                 }
             }
         }else
@@ -190,20 +188,15 @@ public class GameController : MonoBehaviour
         
 
     }
-    private float changeValue(float y)
+    public void CheckEnemyDead(GameObject game)
     {
-        return y = -y;
-    }
-    public void DestroyEnemy(float x , float y)
-    {
-        for( int i = 0; i < lisEnemy.Count; i++)
+        for(int i = 0; i <  lisEnemy.Count; i++ )
         {
-            if(lisEnemy[i].transform.position.x == x && lisEnemy[i].transform.position.y == y)
+            if(lisEnemy[i].transform.position.x == game.transform.position.x  && lisEnemy[i].transform.position.y == game.transform.position.y)
             {
                 lisEnemy.RemoveAt(i);
             }
         }
-        Debug.Log(lisEnemy.Count);
     }
 }
 
